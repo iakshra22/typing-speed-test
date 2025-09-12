@@ -25,9 +25,6 @@ This project is designed to be simple, creative, and fun to use — perfect for 
 
 ---
 
-## 🚀 Demo  
-👉 [Live Demo Link](#) *(Add your GitHub Pages link here once deployed)*  
-
 ---
 
 ## 🛠️ Tech Stack  
