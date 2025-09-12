@@ -58,15 +58,10 @@ animated-quote-generator/
 
 ## 🔮 Future Improvements
 
-. Add more quotes from an API (e.g., Quotes API).
-. Option to save favorite quotes.
-. Add background music toggle.
-. Support for multiple languages.
+1.  Add more quotes from an API (e.g., Quotes API).
+2.  Option to save favorite quotes.
+3.  Add background music toggle.
+4.  Support for multiple languages.
 
 ---
-
-## 🙏 Acknowledgements
-
-. Inspired by daily motivation apps.
-. Thanks to open-source resources for ideas and styling inspiration.
 
