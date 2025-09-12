@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Speed Test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button id="toggleMode">🌙</button>
+
+  <div id="welcomeScreen" class="screen">
+    <h2>🚀 Welcome to Typing Speed Test</h2>
+    <p>Test your typing speed, accuracy & consistency ⚡</p>
+    <button id="startBtn">Start Test</button>
+  </div>
+
+  <div id="gameScreen" class="screen hidden">
+    <h1>⌨️ Typing Speed Test</h1>
+    <div class="progress-bar"><div id="progress"></div></div>
+
+    <div class="container">
+      <p id="quote"></p>
+      <textarea id="input" placeholder="Start typing here..."></textarea>
+      
+      <div class="stats">
+        <span>⏱ Time Left: <b id="timer">60</b>s</span>
+        <span>⚡ Speed: <b id="wpm">0</b> WPM</span>
+        <span>🎯 Accuracy: <b id="accuracy">0</b>%</span>
+      </div>
+
+      <button id="restart">🔄 Restart</button>
+    </div>
+  </div>
+
+  <div id="resultScreen" class="screen hidden">
+    <h2>🎉 Test Completed!</h2>
+    <p>Your Final Speed: <b id="finalWpm">0</b> WPM</p>
+    <p>Your Accuracy: <b id="finalAccuracy">0</b>%</p>
+    <button id="playAgain">Play Again</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
