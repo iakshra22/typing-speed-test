@@ -144,3 +144,4 @@ function finishTest() {
   gameScreen.classList.add("hidden");
   resultScreen.classList.remove("hidden");
 }
+
