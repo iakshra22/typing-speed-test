@@ -33,10 +33,10 @@ It calculates typing speed (WPM) and accuracy in real-time, with a smooth **purp
 
 ## 📂 Project Structure  
 typing-speed-test/
-.│── index.html # Main HTML file
-.│── style.css # Styling and animations
-.│── script.js # Functionality and interactivity
-.│── README.md # Documentation
+1. index.html # Main HTML file
+2. style.css # Styling and animations
+3. script.js # Functionality and interactivity
+4. README.md # Documentation
 
 ---
 
