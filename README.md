@@ -24,11 +24,6 @@ It calculates typing speed (WPM) and accuracy in real-time, with a smooth **purp
 
 ---
 
-## 🚀 Demo  
-👉 [Live Demo Link](#) *(Add your GitHub Pages link here once deployed)*  
-
----
-
 ## 🛠️ Tech Stack  
 - **HTML5** – structure of the app  
 - **CSS3** – styling, animations, dark mode  
