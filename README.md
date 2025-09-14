@@ -1,41 +1,43 @@
-# 🌌 Animated Quote Generator  
+# ⌨️ Typing Speed Test App  
 
-An interactive **Quote Generator App** built with **HTML, CSS, and JavaScript**.  
-It displays motivational lines one by one with a **typing animation**, offers a **dark mode toggle**, and features a beautiful **purple-black theme** with smooth animations.  
-
-This project is designed to be simple, creative, and fun to use — perfect for practicing front-end skills while making something visually engaging.  
+A modern **Typing Speed Test App** built using **HTML, CSS, and JavaScript**.  
+It calculates typing speed (WPM) and accuracy in real-time, with a smooth **purple-black theme**, dark mode toggle, and animations.  
 
 ---
 
 ## ✨ Features  
-- 🎭 Animated typing effect for quotes  
+- ⏱️ Real-time typing speed test (Words Per Minute - WPM)  
+- ✅ Accuracy calculation with error tracking  
 - 🌗 Dark / Light mode toggle  
-- 🎨 Purple-black stylish background with moving animations  
-- 👋 Welcome screen before starting the quotes  
-- ⏩ Next quote loads automatically (no need to wait)  
-- 📱 Fully responsive design  
-- ⚡ Smooth transitions and modern UI feel  
+- 🎨 Purple-black animated background for modern look  
+- 👋 Welcome screen with smooth start animation  
+- 📱 Responsive design (works on mobile & desktop)  
+- 🎭 Smooth CSS/JS animations for better UX  
 
 ---
 
 ## ❓ Why This Project?  
-- To practice **JavaScript DOM manipulation**.  
-- To learn how to use **CSS animations** and **JavaScript intervals** together.  
-- To create something fun and interactive that looks professional.  
+- Practice **JavaScript DOM manipulation** and timers  
+- Learn **real-time calculations** with input tracking  
+- Implement **dark mode toggle** and custom UI  
+- Build something fun, useful, and interactive  
 
 ---
+
+## 🚀 Demo  
+👉 [Live Demo Link](#) *(Add your GitHub Pages link here once deployed)*  
 
 ---
 
 ## 🛠️ Tech Stack  
 - **HTML5** – structure of the app  
-- **CSS3** – styling, transitions, animations  
-- **JavaScript (Vanilla JS)** – interactivity, typing effect, dark mode toggle  
+- **CSS3** – styling, animations, dark mode  
+- **JavaScript (Vanilla JS)** – timer, input tracking, score calculation  
 
 ---
 
 ## 📂 Project Structure  
-animated-quote-generator/
+typing-speed-test/
 │── index.html # Main HTML file
 │── style.css # Styling and animations
 │── script.js # Functionality and interactivity
@@ -46,22 +48,26 @@ animated-quote-generator/
 ## 💡 How to Use  
 1. Clone the repository  
    ```bash
-   git clone https://github.com/your-username/animated-quote-generator.git
+   git clone https://github.com/iakshra22/animated-quote-generator.git
 
 2. Open index.html in your browser.
    
-3. Click Start to begin the animated quotes.
+3. Type the words shown on screen.
    
-5. Toggle Dark Mode 🌗 anytime!
+5. Get your results: Speed (WPM) & Accuracy.
 
 ---
 
 ## 🔮 Future Improvements
 
-1.  Add more quotes from an API (e.g., Quotes API).
-2.  Option to save favorite quotes.
-3.  Add background music toggle.
-4.  Support for multiple languages.
+1.  📊 Show typing history & best score
+2.  🌍 Multi-language support
+3.  🎧 Add typing sound effects
+4.  🔗 Fetch random text from an API instead of static lines
 
 ---
+
+## 📎 Thankyou so much:
+
+Feel free to use, share, and improve this voice assistant. Contributions are welcome!
 
