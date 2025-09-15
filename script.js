@@ -145,3 +145,4 @@ function finishTest() {
   resultScreen.classList.remove("hidden");
 }
 
+
