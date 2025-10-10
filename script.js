@@ -16,7 +16,6 @@ const progressBar = document.getElementById("progress");
 const finalWpm = document.getElementById("finalWpm");
 const finalAccuracy = document.getElementById("finalAccuracy");
 const playAgainBtn = document.getElementById("playAgain");
-
 const welcomeScreen = document.getElementById("welcomeScreen");
 const gameScreen = document.getElementById("gameScreen");
 const resultScreen = document.getElementById("resultScreen");
@@ -144,6 +143,7 @@ function finishTest() {
   gameScreen.classList.add("hidden");
   resultScreen.classList.remove("hidden");
 }
+
 
 
 
