@@ -3,7 +3,7 @@
 A modern **Typing Speed Test App** built using **HTML, CSS, and JavaScript**. 
 It calculates typing speed (WPM) and accuracy in real-time, with a smooth **purple-black theme**, dark mode toggle, and animations.
 
---
+---
 
 ## ✨ Features  
 - ⏱️ Real-time typing speed test (Words Per Minute - WPM)  
