@@ -1,6 +1,6 @@
 const quotes = [
   "Consistency is more important than intensity. Work every day and results will come naturally.",
-  "JavaScript is not just a programming language but the backbone of the interactive web that powers millions of websites today.",
+  "JavaScript is not just a programming language but the backbone of the interactive web that powers millionss of websites today.",
   "Typing quickly and accurately is a valuable skill that improves communication, productivity, and saves time in the digital age.",
   "Discipline beats motivation. Even when you do not feel like doing something, show up and do it anyway.",
   "Technology is constantly evolving, and those who keep learning will always stay ahead of the curve.",
