@@ -9,7 +9,7 @@ It calculates typing speed (WPM) and accuracy in real-time, with a smooth **purp
 - ⏱️ Real-time typing speed test (Words Per Minute - WPM)  
 - ✅ Accuracy calculation with error tracking 
 - 🌗 Dark / Light mode toggle  
-- 🎨 Purple-black animated background for modern look 
+- 🎨 Purple-black animated background for modern look
 - 👋 Welcome screen with smooth start animation  
 - 📱 Responsive design (works on mobile & desktop)  
 - 🎭 Smooth CSS/JS animations for better UX  
