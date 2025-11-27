@@ -5,6 +5,7 @@ const quotes = [
   "Discipline beats motivation. Even when you do not feel like doing something, show up and do it anyway.",
   "Do it because they say you can't",
   "Technology is constantly evolving, and those who keep learning will always stay ahead of the curve.",
+  " do your best",
   "Dont expect anyhthing from anyone."
 ];
 
@@ -145,6 +146,7 @@ function finishTest() {
   gameScreen.classList.add("hidden");
   resultScreen.classList.remove("hidden");
 }
+
 
 
 
