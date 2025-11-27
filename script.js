@@ -1,12 +1,12 @@
 const quotes = [
   "Consistency is more important than intensity. Work every day and results will come naturally.",
-  "JavaScript is not just a programming language but the backbone of the interactive web that powers millionss of websites today.",
+  "JavaScript is not just a programming language but the backbone of the interactive web that powers millions of websites today.",
   "Typing quickly and accurately is a valuable skill that improves communication, productivity, and saves time in the digital age.",
   "Discipline beats motivation. Even when you do not feel like doing something, show up and do it anyway.",
-  "Do it because they say you can't",
+  "Do it because they say you can't.",
   "Technology is constantly evolving, and those who keep learning will always stay ahead of the curve.",
-  " do your best",
-  "Dont expect anyhthing from anyone."
+  "Do your best.",
+  "Don't expect anything from anyone."
 ];
 
 const quoteEl = document.getElementById("quote");
@@ -23,39 +23,51 @@ const welcomeScreen = document.getElementById("welcomeScreen");
 const gameScreen = document.getElementById("gameScreen");
 const resultScreen = document.getElementById("resultScreen");
 const toggleBtn = document.getElementById("toggleMode");
+const startBtn = document.getElementById("startBtn");
 
-let time = 60;
-let timer;
-let correctChars = 0, totalChars = 0;
+let timeLimit = 60;            
+let time = timeLimit;
+let timer = null;
+let timerStarted = false;
+
 let currentLine = 0;
-let selectedQuote = [];
+let selectedQuoteLines = [];
 
+let cumCorrectChars = 0;
+let cumTotalTyped = 0;
 
-function loadLine() {
-  if (currentLine < selectedQuote.length) {
-    quoteEl.innerHTML = "";
-    selectedQuote[currentLine].split("").forEach(char => {
-      let span = document.createElement("span");
-      span.innerText = char;
-      quoteEl.appendChild(span);
-    });
-    inputEl.value = "";
-  } else {
-    finishTest();
-  }
-}
+let currentCorrect = 0;
+let currentTotalTyped = 0;
 
-function loadQuote() {
-  let random = quotes[Math.floor(Math.random() * quotes.length)];
-  selectedQuote = random.split(". ");
+function pickRandomQuoteAndSplit() {
+  const raw = quotes[Math.floor(Math.random() * quotes.length)];
+  const matches = raw.match(/[^.!?]+[.!?]?/g) || [raw];
+  selectedQuoteLines = matches.map(s => s.trim()).filter(Boolean);
   currentLine = 0;
-  loadLine();
 }
 
-function startTimer() {
+function renderCurrentLine() {
+  quoteEl.innerHTML = "";
+  if (currentLine >= selectedQuoteLines.length) {
+    finishTest();
+    return;
+  }
+  const text = selectedQuoteLines[currentLine];
+  for (let ch of text) {
+    const span = document.createElement("span");
+    span.innerText = ch;
+    quoteEl.appendChild(span);
+  }
+  inputEl.value = "";
+  inputEl.focus();
+}
+
+function startTimerIfNeeded() {
+  if (timerStarted) return;
+  timerStarted = true;
   timer = setInterval(() => {
     time--;
-    timerEl.textContent = time;
+    updateTimerDisplay();
     if (time <= 0) {
       clearInterval(timer);
       finishTest();
@@ -63,95 +75,146 @@ function startTimer() {
   }, 1000);
 }
 
-inputEl.addEventListener("input", () => {
-  const quoteChars = quoteEl.querySelectorAll("span");
-  const inputChars = inputEl.value.split("");
+function updateTimerDisplay() {
+  const mm = Math.floor(time / 60).toString().padStart(2, "0");
+  const ss = (time % 60).toString().padStart(2, "0");
+  timerEl.textContent = `${mm}:${ss}`;
+}
 
-  correctChars = 0;
-  totalChars = inputChars.length;
-  let finished = true;
+function computeAndShowStats() {
+  const totalCorrect = cumCorrectChars + currentCorrect;
+  const totalTyped = cumTotalTyped + currentTotalTyped;
 
-  quoteChars.forEach((char, index) => {
-    const typedChar = inputChars[index];
-    if (typedChar == null) {
-      char.classList.remove("correct", "incorrect");
-      finished = false;
-    } else if (typedChar === char.innerText) {
-      char.classList.add("correct");
-      char.classList.remove("incorrect");
-      correctChars++;
-    } else {
-      char.classList.add("incorrect");
-      char.classList.remove("correct");
-      finished = false;
-    }
-  });
-
-  if (finished && inputChars.length === quoteChars.length) {
-    currentLine++;
-    progressBar.style.width = `${(currentLine / selectedQuote.length) * 100}%`;
-    setTimeout(loadLine, 500);
-  }
-
-  let minutes = (60 - time) / 60;
-  let wpm = minutes > 0 ? Math.round((correctChars / 5) / minutes) : 0;
-  let accuracy = totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 0;
+  const secondsElapsed = Math.max(1, timeLimit - time); // avoid div-by-zero
+  const minutesElapsed = secondsElapsed / 60;
+  const wpm = minutesElapsed > 0 ? Math.round((totalCorrect / 5) / minutesElapsed) : 0;
+  const accuracy = totalTyped > 0 ? Math.round((totalCorrect / totalTyped) * 100) : 0;
 
   wpmEl.textContent = wpm;
   accuracyEl.textContent = accuracy;
+}
+
+inputEl.addEventListener("input", (e) => {
+  startTimerIfNeeded();
+
+  const quoteChars = quoteEl.querySelectorAll("span");
+  const typedChars = inputEl.value.split("");
+
+  currentCorrect = 0;
+  currentTotalTyped = typedChars.length;
+
+  let finishedLine = true;
+
+  quoteChars.forEach((span, idx) => {
+    const expected = span.innerText;
+    const typed = typedChars[idx];
+    span.classList.remove("correct", "incorrect");
+
+    if (typed == null) {
+      finishedLine = false;
+    } else if (typed === expected) {
+      span.classList.add("correct");
+      currentCorrect++;
+    } else {
+      span.classList.add("incorrect");
+      finishedLine = false;
+    }
+  });
+
+  if (finishedLine && typedChars.length === quoteChars.length) {
+    cumCorrectChars += currentCorrect;
+    cumTotalTyped += currentTotalTyped;
+
+    currentLine++;
+    progressBar.style.width = `${Math.round((currentLine / selectedQuoteLines.length) * 100)}%`;
+
+    setTimeout(() => {
+      renderCurrentLine();
+      currentCorrect = 0;
+      currentTotalTyped = 0;
+      computeAndShowStats();
+    }, 300);
+  } else {
+    computeAndShowStats();
+  }
 });
 
-restartBtn.addEventListener("click", () => {
-  resetGame();
-});
-
-playAgainBtn.addEventListener("click", () => {
-  resetGame();
+restartBtn.addEventListener("click", resetGame);
+playAgainBtn && playAgainBtn.addEventListener("click", () => {
   resultScreen.classList.add("hidden");
   gameScreen.classList.remove("hidden");
+  resetGame();
 });
 
-
-toggleBtn.addEventListener("click", () => {
+toggleBtn && toggleBtn.addEventListener("click", () => {
   document.body.classList.toggle("light");
   toggleBtn.textContent = document.body.classList.contains("light") ? "☀️" : "🌙";
 });
 
-
-document.getElementById("startBtn").addEventListener("click", () => {
-  welcomeScreen.classList.add("hidden");
-  gameScreen.classList.remove("hidden");
+startBtn && startBtn.addEventListener("click", () => {
+  welcomeScreen && welcomeScreen.classList.add("hidden");
+  gameScreen && gameScreen.classList.remove("hidden");
   resetGame();
 });
 
 function resetGame() {
   clearInterval(timer);
-  time = 60;
-  correctChars = 0;
-  totalChars = 0;
-  inputEl.disabled = false;
-  timerEl.textContent = time;
-  wpmEl.textContent = 0;
-  accuracyEl.textContent = 0;
+  timer = null;
+  timerStarted = false;
+
+  time = timeLimit;
+  updateTimerDisplay();
+
+  cumCorrectChars = 0;
+  cumTotalTyped = 0;
+  currentCorrect = 0;
+  currentTotalTyped = 0;
+
+  wpmEl.textContent = "0";
+  accuracyEl.textContent = "0";
   progressBar.style.width = "0%";
-  loadQuote();
-  startTimer();
+
+  inputEl.disabled = false;
+  inputEl.value = "";
+
+  pickRandomQuoteAndSplit();
+  renderCurrentLine();
 }
 
 function finishTest() {
   clearInterval(timer);
+  timer = null;
+  timerStarted = false;
   inputEl.disabled = true;
-  finalWpm.textContent = wpmEl.textContent;
-  finalAccuracy.textContent = accuracyEl.textContent;
-  gameScreen.classList.add("hidden");
-  resultScreen.classList.remove("hidden");
+
+  const quoteChars = quoteEl.querySelectorAll("span");
+  const typedChars = inputEl.value.split("");
+  let lastCorrect = 0, lastTyped = typedChars.length;
+  quoteChars.forEach((span, idx) => {
+    if (typedChars[idx] != null && typedChars[idx] === span.innerText) lastCorrect++;
+  });
+
+  const totalCorrect = cumCorrectChars + lastCorrect;
+  const totalTyped = cumTotalTyped + lastTyped;
+
+  const secondsElapsed = Math.max(1, timeLimit - timeLimit + (timeLimit - time)); // ensures at least 1 sec
+  const minutesElapsed = (timeLimit - time) / 60;
+  const finalWpmValue = minutesElapsed > 0 ? Math.round((totalCorrect / 5) / minutesElapsed) : 0;
+  const finalAccuracyValue = totalTyped > 0 ? Math.round((totalCorrect / totalTyped) * 100) : 0;
+
+  finalWpm.textContent = finalWpmValue;
+  finalAccuracy.textContent = finalAccuracyValue;
+
+  wpmEl.textContent = finalWpmValue;
+  accuracyEl.textContent = finalAccuracyValue;
+
+  if (gameScreen && resultScreen) {
+    gameScreen.classList.add("hidden");
+    resultScreen.classList.remove("hidden");
+  }
 }
 
-
-
-
-
-
+updateTimerDisplay();
 
 
 
