@@ -25,7 +25,7 @@ const resultScreen = document.getElementById("resultScreen");
 const toggleBtn = document.getElementById("toggleMode");
 const startBtn = document.getElementById("startBtn");
 
-let timeLimit = 60;            
+let timeLimit = 90;            
 let time = timeLimit;
 let timer = null;
 let timerStarted = false;
@@ -85,7 +85,7 @@ function computeAndShowStats() {
   const totalCorrect = cumCorrectChars + currentCorrect;
   const totalTyped = cumTotalTyped + currentTotalTyped;
 
-  const secondsElapsed = Math.max(1, timeLimit - time); // avoid div-by-zero
+  const secondsElapsed = Math.max(1, timeLimit - time); 
   const minutesElapsed = secondsElapsed / 60;
   const wpm = minutesElapsed > 0 ? Math.round((totalCorrect / 5) / minutesElapsed) : 0;
   const accuracy = totalTyped > 0 ? Math.round((totalCorrect / totalTyped) * 100) : 0;
@@ -197,7 +197,7 @@ function finishTest() {
   const totalCorrect = cumCorrectChars + lastCorrect;
   const totalTyped = cumTotalTyped + lastTyped;
 
-  const secondsElapsed = Math.max(1, timeLimit - timeLimit + (timeLimit - time)); // ensures at least 1 sec
+  const secondsElapsed = Math.max(1, timeLimit - timeLimit + (timeLimit - time)); 
   const minutesElapsed = (timeLimit - time) / 60;
   const finalWpmValue = minutesElapsed > 0 ? Math.round((totalCorrect / 5) / minutesElapsed) : 0;
   const finalAccuracyValue = totalTyped > 0 ? Math.round((totalCorrect / totalTyped) * 100) : 0;
@@ -215,6 +215,7 @@ function finishTest() {
 }
 
 updateTimerDisplay();
+
 
 
 
