@@ -43,7 +43,7 @@ typing-speed-test/
 ## 💡 How to Use  
 1. Clone the repository  
    ```bash
-   git clone https://github.com/iakshra22/animated-quote-generator.git
+   git clone https://github.com/iakshra22/typing-speed-test.git
 
 2. Open index.html in your browser.
    
